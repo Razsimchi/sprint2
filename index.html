@@ -4,9 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
 </head>
-<body>
-    
+<body onload="onInit()">
+    <section class="gallery">
+    </section>
+    <section class="editor">
+        <!-- <form onsubmit="onTextSubmit(event)">
+            <input onkeyup="onTextInput(event)" type="text">
+        </form> -->
+        <div class="canvas-container">
+            <canvas width="400" height="400"></canvas>
+        </div>
+        <div class="canvas-editor">
+            <div class="inputs">
+                <form onsubmit="onTextSubmit(event)">
+                    <input onkeyup="onTextInput(event)" type="text">
+                </form>
+                <button onclick="onChangeLine()"><img src="ICONS/up-and-down-opposite-double-arrows-side-by-side (1).png" alt=""></button>
+                <button onclick=""><img src="ICONS/add.png" alt=""></button>
+                <button onclick=""><img src="ICONS/trash.png" alt=""></button>
+                <button onclick=""><img src="ICONS/increase_font_-_icon.png" alt=""></button>
+                <button onclick=""><img src="ICONS/decrease_font_-_icon.png" alt=""></button>
+                <button onclick=""><img src="ICONS/align-to-left.png" alt=""></button>
+                <button onclick=""><img src="ICONS/center-text-alignment.png" alt=""></button>
+                <button onclick=""><img src="ICONS/align-to-right.png" alt=""></button>
+                <select name="" id=""></select>
+                <button onclick=""><img src="ICONS/A.png" alt=""></button>
+                <button onclick=""><img src="ICONS/paint-board-and-brush.png" alt=""></button>
+
+            </div>
+        </div>
+    </section>
+
+    <script src="js/service/main.service.js"></script>
+    <script src="js/controller/main.controller.js"></script>
+    <script src="js/controller/gallery.controller.js"></script>
 </body>
 </html>

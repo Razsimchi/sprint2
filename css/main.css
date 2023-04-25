@@ -1,0 +1,10 @@
+body {
+    text-align: center;
+  }
+  
+  canvas {
+    display: block;
+    margin: auto;
+    background-color: white;
+    border: 1px solid black;
+  }
