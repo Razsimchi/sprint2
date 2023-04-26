@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,39 +8,80 @@
     <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
 </head>
-<body onload="onInit()">
-    <section class="gallery">
-    </section>
-    <section class="editor">
-        <!-- <form onsubmit="onTextSubmit(event)">
+
+<body class="main-layout" onload="onInit()">
+    <header class="main-header full main-layout">
+        <div class="inside-header">
+            <div class="header-logo"><img src="ICONS/logo/Logo.png"></div>
+            <ul>
+                <li onclick="onGallery()">Gallery</li>
+                <li>About</li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <section class="gallery" style="display: none;">
+        </section>
+        <section class="editor editor-layout">
+            <!-- <form onsubmit="onTextSubmit(event)">
             <input onkeyup="onTextInput(event)" type="text">
         </form> -->
-        <div class="canvas-container">
-            <canvas width="400" height="400"></canvas>
-        </div>
-        <div class="canvas-editor">
-            <div class="inputs">
-                <form onsubmit="onTextSubmit(event)">
-                    <input onkeyup="onTextInput(event)" type="text">
-                </form>
-                <button onclick="onChangeLine()"><img src="ICONS/up-and-down-opposite-double-arrows-side-by-side (1).png" alt=""></button>
-                <button onclick=""><img src="ICONS/add.png" alt=""></button>
-                <button onclick=""><img src="ICONS/trash.png" alt=""></button>
-                <button onclick=""><img src="ICONS/increase_font_-_icon.png" alt=""></button>
-                <button onclick=""><img src="ICONS/decrease_font_-_icon.png" alt=""></button>
-                <button onclick=""><img src="ICONS/align-to-left.png" alt=""></button>
-                <button onclick=""><img src="ICONS/center-text-alignment.png" alt=""></button>
-                <button onclick=""><img src="ICONS/align-to-right.png" alt=""></button>
-                <select name="" id=""></select>
-                <button onclick=""><img src="ICONS/A.png" alt=""></button>
-                <button onclick=""><img src="ICONS/paint-board-and-brush.png" alt=""></button>
-
+            <div class="canvas-container">
+                <canvas width="400" height="400"></canvas>
             </div>
+            <div class="canvas-editor">
+                <div class="inputs inputs-layout">
+                    <form onsubmit="onTextSubmit(event)">
+                        <input class="border-rad-white-bg" onkeyup="onTextInput(event)" type="text" placeholder="Enter text here">
+                    </form>
+                    <section class="inputs-sect-1 flex justify-centr">
+                        <button class="btn border-rad-white-bg" onclick="onChangeLine()"><img
+                                src="ICONS/up-and-down-opposite-double-arrows-side-by-side (1).png" alt=""></button>
+                        <button class="btn border-rad-white-bg" onclick="onAddNewLine()"><img src="ICONS/add.png" alt=""></button>
+                        <button class="btn border-rad-white-bg" onclick="onClear()"><img src="ICONS/trash.png" alt=""></button>
+                    </section>
+                    <section class="inputs-sect-2 flex justify-centr">
+                        <button class="btn border-rad-white-bg" onclick="onIncreaseFont()"><img src="ICONS/increase_font_-_icon.png"
+                                alt=""></button>
+                        <button class="btn border-rad-white-bg" onclick="onDecreaseFont()"><img src="ICONS/decrease_font_-_icon.png"
+                                alt=""></button>
+                        <button class="btn border-rad-white-bg" onclick="onAlignToLeft()"><img src="ICONS/align-to-left.png"
+                                alt=""></button>
+                        <button class="btn border-rad-white-bg" onclick="onAlignToCenter()"><img src="ICONS/center-text-alignment.png"
+                                alt=""></button>
+                        <button class="btn border-rad-white-bg" onclick="onAlignToRight()"><img src="ICONS/align-to-right.png"
+                                alt=""></button>
+                    </section>
+                    <section class="inputs-sect-3 flex justify-centr">
+                        <select  onchange="onChangeFont()" class="font-select border-rad-white-bg" name="font-select" id="">
+                            <option value="Impact">Impact</option>
+                            <option value="Helvetica">Helvetica</option>
+                            <option value="BrunoAceSC">BrunoAceSC</option>
+                            <option value="Sigmar">Sigmar</option>
+                            <option value="VinaSans">VinaSans</option>
+                        </select>
+                        <button class="btn border-rad-white-bg" onclick="onStroke()"><img src="ICONS/A.png" alt=""></button>
+                        <input type="color" style="display: none" class="color-input" value="#FFFFFF">
+                        <button class="btn border-rad-white-bg" onclick="onChangeColor()"><img src="ICONS/paint-board-and-brush.png"
+                                alt=""></button>
+                    </section>
+                    <section class="inputs-sect-4 flex justify-centr">
+                        <button onclick="onShareMeme()">Share</button>
+                        <button><a href="#" onclick="downloadMeme(this)" download="my-meme.jpg">Download</a></button>
+                        <input type="file" class="file-input" name="image" onchange="onImgInput(event)" />
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="main-footer full main-layout">
+        <div class="inside-footer">
+            <div class="footer-logo"><img src="ICONS/logo/Logo.png"></div>
+            <p class="footer-text">all rights reserved 2023</p>
         </div>
-    </section>
-
-    <script src="js/service/main.service.js"></script>
-    <script src="js/controller/main.controller.js"></script>
-    <script src="js/controller/gallery.controller.js"></script>
+        <script src="js/service/main.service.js"></script>
+        <script src="js/controller/main.controller.js"></script>
+        <script src="js/controller/gallery.controller.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,16 @@
+.main-footer{
+    height: 207px;
+    background-color: rgb(34 96 139 / 76%);
+}
+.inside-footer{
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1;
+}
+.footer-logo{
+    margin-block-start: 4.8125rem;
+}
+.footer-text{
+    margin-block-start: 1rem;
+    margin-block-end: 4.5625rem;
+}

@@ -1,10 +1,17 @@
-body {
-    text-align: center;
-  }
-  
-  canvas {
-    display: block;
-    margin: auto;
-    background-color: white;
-    border: 1px solid black;
-  }
+/* setup */
+
+@import url(setup/vars.css);
+@import url(setup/typography.css);
+
+/* basics */
+
+@import url(basics/base.css);
+@import url(basics/layout.css);
+@import url(basics/helpers.css);
+
+/* components */
+
+@import url(components/header.css);
+@import url(components/footer.css);
+@import url(components/editor-board.css);
+

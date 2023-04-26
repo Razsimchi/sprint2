@@ -1,0 +1,29 @@
+.main-layout{
+    display: grid;
+    grid-template-columns: 
+    minmax(20px,1fr)
+    minmax(auto,var(--l))
+    minmax(20px,1fr);
+    row-gap: 1.625rem;
+}
+.main-layout > *:not(.full){
+    grid-column:2 ;
+}
+.main-layout > .full{
+    grid-column: 1 / -1 ;
+}
+
+.editor-layout{
+    display: grid;
+    grid-template-columns: 
+    minmax(auto,1fr)
+    40px
+    minmax(auto,1fr);
+}
+.editor-layout > *:not(:first-child){
+    grid-column: 3;
+}
+.inputs-layout{
+    display: grid;
+    grid-template-columns: 1;
+}

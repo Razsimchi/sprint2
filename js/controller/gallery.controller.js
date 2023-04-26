@@ -13,3 +13,9 @@ function onImgSelect(id){
     const meme = getgMeme()
     renderMeme(meme)
 }
+function onGallery(){
+    const elEditor = document.querySelector('.editor')
+    const elGallery = document.querySelector('.gallery')
+    elEditor.style.display = "none"
+    elGallery.style.display = "block"
+}

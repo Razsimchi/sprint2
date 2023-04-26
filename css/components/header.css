@@ -1,0 +1,25 @@
+.main-header {
+    background-color: rgb(34 96 139 / 76%);
+}
+
+.main-header .inside-header {
+    height: 66px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header ul {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    justify-content: space-around;
+}
+.main-header ul li{
+    font-family: Montserrat;
+    font-size: 1.1875rem;
+    color: white;
+}
