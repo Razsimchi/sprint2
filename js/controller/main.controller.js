@@ -5,8 +5,9 @@ function onInit() {
     const ctx = canvas.getContext('2d')
     setgElCanvas(canvas)
     setgCtx(ctx)
-    renderMeme(gMeme)
+    renderMeme()
     renderGallery()
+    renderSavedMemes()
     resizeCanvas()
     addMouseListeners()
 }
@@ -30,14 +31,14 @@ function renderMeme() {
 }
 function onTextInput(ev) {
     if (ev.keyCode === 13) return
-    const txt = document.querySelector('input').value
+    const txt = document.querySelector('.text-input').value
     updategMeme(txt)
     renderMeme()
 }
 
 function onTextSubmit(ev) {
     ev.preventDefault()
-    document.querySelector('input').value = ''
+    document.querySelector('.text-input').value = ''
 }
 function onChangeLine() {
     changeLine()
@@ -137,4 +138,63 @@ function downloadMeme(elLink) {
 function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container')
     updategElCanvas(elContainer)
+}
+function onMeme() {
+    const elEditor = document.querySelector('.editor')
+    const elGallery = document.querySelector('.gallery')
+    const elGallerySearch = document.querySelector('.gallery-search')
+    const elSavedMemes = document.querySelector('.saved-memes')
+    elEditor.style.display = "grid"
+    elGallery.style.display = "none"
+    elGallerySearch.style.display = "none"
+    elSavedMemes.style.display = 'none'
+
+}
+function onSave() {
+    save()
+    console.log(gSavedMemes);
+    renderSavedMemes()
+}
+function renderSavedMemes(){
+    const savedMemes = getgSavedMemes()
+    let strHTML = savedMemes.map((savedMeme,idx) => `<img class="img-gallery" 
+    onclick="onSavedMeme(${idx})" 
+    src="${savedMeme.img}" alt="">`
+    ).join('')
+    const elSavedMeme = document.querySelector('.saved-memes')
+    elSavedMeme.innerHTML=strHTML
+ }
+ function onSavedMeme(idx){
+    setgMeme(idx)
+    renderMeme()
+    onMeme()
+ }
+ function onMyMemes(){
+    const elGallery = document.querySelector('.gallery')
+    const elGallerySearch = document.querySelector('.gallery-search')
+    const elEditor = document.querySelector('.editor')
+    const elSavedMemes = document.querySelector('.saved-memes')
+    elEditor.style.display = "none"
+    elSavedMemes.style.display = "grid"
+    elGallery.style.display='none'
+    elGallerySearch.style.display='none'
+ }
+ function onImgInput(ev) {
+    loadImageFromInput(ev, renderImg)
+}
+function loadImageFromInput(ev, onImageReady) {
+    const reader = new FileReader()
+    reader.onload = function (event) {
+        let img = new Image() 
+        img.src = event.target.result 
+        img.onload = onImageReady.bind(null, img)
+        addToImgs(img.src)
+    }
+    reader.readAsDataURL(ev.target.files[0])
+}
+function renderImg(img) {
+    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+}
+function toggleMenu(){
+    document.body.classList.toggle('menu-open')
 }

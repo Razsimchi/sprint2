@@ -1,29 +1,42 @@
-.main-layout{
+.main-layout {
     display: grid;
-    grid-template-columns: 
-    minmax(20px,1fr)
-    minmax(auto,var(--l))
-    minmax(20px,1fr);
-    row-gap: 1.625rem;
-}
-.main-layout > *:not(.full){
-    grid-column:2 ;
-}
-.main-layout > .full{
-    grid-column: 1 / -1 ;
+    grid-template-columns:
+        20px 1fr 20px
 }
 
-.editor-layout{
+.main-layout>*:not(.full) {
+    grid-column: 2;
+}
+
+.main-layout>.full {
+    grid-column: 1 / -1;
+}
+.editor-layout {
     display: grid;
-    grid-template-columns: 
-    minmax(auto,1fr)
-    40px
-    minmax(auto,1fr);
+    grid-template-rows:
+        1fr 20px 1fr;
 }
-.editor-layout > *:not(:first-child){
-    grid-column: 3;
+
+.editor-layout>*:not(:first-child) {
+    grid-row: 3;
 }
-.inputs-layout{
+
+
+
+.inputs-layout {
     display: grid;
     grid-template-columns: 1;
+}
+
+.gallery-layout {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 10px;
+    margin: 0 auto;
+}
+.meme-layout{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(auto,250px));
+    gap: 10px;
+    margin: 0 auto;
 }

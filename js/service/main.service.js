@@ -1,7 +1,9 @@
 'use strict'
+const STORAGE_KEY = 'memesdb'
 const gPositions = [{ x: 200, y: 40 }, { x: 200, y: 360 }, { x: 200, y: 200 }]
 let gElCanvas
 let gCtx
+let gSavedMemes = loadFromStorage(STORAGE_KEY) || []
 let gImgs = fillgImgs()
 let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 let gMeme = {
@@ -39,7 +41,7 @@ function setgCtx(ctx) {
 function getgCtx() {
     return gCtx
 }
-function drawText(text, x, y, color, isStroke, size, align, font='Impact') {
+function drawText(text, x, y, color, isStroke, size, align, font = 'Impact') {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
     gCtx.fillStyle = color
@@ -81,7 +83,7 @@ function updategMeme(txt) {
     gMeme.lines[selectedLineIdx].txt = txt
 }
 function _saveMemeToStorage() {
-    saveToStorage(STORAGE_KEY, gMeme)
+    saveToStorage(STORAGE_KEY, gSavedMemes)
 }
 function fillgImgs() {
     const imgs = []
@@ -118,35 +120,35 @@ function clear() {
     gMeme.lines.forEach(line => line.txt = '')
     gMeme.selectedLineIdx = 0
 }
-function increaseFont(){
+function increaseFont() {
     const lineIdx = gMeme.selectedLineIdx
     gMeme.lines[lineIdx].size += 5
 }
-function decreaseFont(){
+function decreaseFont() {
     const lineIdx = gMeme.selectedLineIdx
     gMeme.lines[lineIdx].size -= 5
 }
-function alignToLeft(){
+function alignToLeft() {
     const lineIdx = gMeme.selectedLineIdx
     gMeme.lines[lineIdx].align = 'left'
 }
-function alignToCenter(){
+function alignToCenter() {
     const lineIdx = gMeme.selectedLineIdx
     gMeme.lines[lineIdx].align = 'center'
 }
-function alignToRight(){
+function alignToRight() {
     const lineIdx = gMeme.selectedLineIdx
     gMeme.lines[lineIdx].align = 'right'
 }
-function addStroke(){
+function addStroke() {
     const lineIdx = gMeme.selectedLineIdx
     gMeme.lines[lineIdx].isStroke = !gMeme.lines[lineIdx].isStroke
 }
-function getColor(color='black'){ 
+function getColor(color = 'black') {
     const lineIdx = gMeme.selectedLineIdx
     gMeme.lines[lineIdx].color = color
 }
-function changeFont(font){
+function changeFont(font) {
     const lineIdx = gMeme.selectedLineIdx
     gMeme.lines[lineIdx].font = font
 }
@@ -160,16 +162,32 @@ function getEvPos(ev) {
 function addMouseListeners() {
     gElCanvas.addEventListener('click', onCanvasClick)
 }
-function handleCanvasClick(ev){
+function handleCanvasClick(ev) {
     let lineIdx
     const pos = getEvPos(ev)
-    if (pos.y >= 20 && pos.y <= 55) lineIdx=0
-    else if (pos.y >= 340 && pos.y <= 375) lineIdx=1
-    else if (pos.y >= 180 && pos.y <= 215) lineIdx=2
+    if (pos.y >= 20 && pos.y <= 55) lineIdx = 0
+    else if (pos.y >= 340 && pos.y <= 375) lineIdx = 1
+    else if (pos.y >= 180 && pos.y <= 215) lineIdx = 2
     else return
     gMeme.selectedLineIdx = lineIdx
 }
 function updategElCanvas(elContainer) {
     gElCanvas.width = elContainer.offsetWidth
     gElCanvas.height = elContainer.offsetHeight
+}
+function getgSavedMemes() {
+    return gSavedMemes
+}
+function save() {
+    const imgContent = gElCanvas.toDataURL('image/jpeg')
+    gSavedMemes.push({ img: imgContent, meme: {...gMeme}})
+    _saveMemeToStorage()
+}
+function setgMeme(idx) {
+    gMeme = gSavedMemes[idx].meme
+}
+function addToImgs(img) {
+    const image = { id: gImgs.length + 1, url: img }
+    gMeme.selectedImgId = gImgs.length + 1
+    gImgs.push(image)
 }

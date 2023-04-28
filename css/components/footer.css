@@ -13,4 +13,10 @@
 .footer-text{
     margin-block-start: 1rem;
     margin-block-end: 4.5625rem;
+    font-family: Montserrat-thin;
+    font-size: 1.1875rem;
+    color: white;
+}
+.footer-logo img{
+    width: auto;
 }

@@ -1,0 +1,28 @@
+.gallery-search input {
+    height: 6.375rem;
+    border: none;
+    width: fit-content;
+}
+.gallery-search{
+    background-color: white;
+}
+.gallery-search input::placeholder{
+    border-block-end: solid 1px black;
+    color: #7a7a7a;
+    font-family: Montserrat-regular;
+    font-size: 1.1875rem;
+}
+.img-gallery{
+    display: block;
+    width: 100%;
+}
+.bottom-section-gallery-inside{
+    display: flex;
+    gap: 41px;
+}
+.card{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

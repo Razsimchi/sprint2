@@ -11,6 +11,14 @@
     src: url(../../FONTS/Vina_Sans/VinaSans-Regular.ttf);
 }
 @font-face {
-    font-family: Montserrat ;
+    font-family: Montserrat-regular;
     src: url(../../FONTS/Montserrat/Montserrat-Regular.ttf);
+}
+@font-face {
+    font-family: Montserrat-thin ;
+    src: url(../../FONTS/Montserrat/Montserrat-Thin.ttf);
+}
+@font-face {
+    font-family: Montserrat-bold ;
+    src: url(../../FONTS/Montserrat/Montserrat-Bold.ttf);
 }
