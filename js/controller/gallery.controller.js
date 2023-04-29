@@ -23,3 +23,26 @@ function onGallery(){
     elGallerySearch.style.display = 'grid'
     elSavedMeme.style.display = 'none'
 }
+function onSearch(){
+    const input = document.querySelector('.search-input').value
+    updategKeyWordSerched(input)
+    updategKeywordSearchCountMap(input)
+    renderGallery()
+    renderKeyWord()
+}
+function renderKeyWord(){
+    const elKeyWords = document.querySelector('.key-words')
+    const keyWords = getgKeywordSearchCountMap()
+    let strHTML = `<span style="font-size: ${16+keyWords.all}px;" onclick="onKeyWord('all')">All</span>
+    <span style="font-size: ${16+keyWords.funny}px;" onclick="onKeyWord('funny')">Funny</span>
+    <span style="font-size: ${16+keyWords.cat}px;" onclick="onKeyWord('cat')">Cat</span>
+    <span style="font-size: ${16+keyWords.baby}px;" onclick="onKeyWord('baby')">Baby</span>`
+    elKeyWords.innerHTML = strHTML
+}
+function onKeyWord(key){
+    updategKeyWordSerched(key)
+    updategKeywordSearchCountMap(key)
+    renderGallery()
+    renderKeyWord()
+    console.log(gKeywordSearchCountMap);
+}

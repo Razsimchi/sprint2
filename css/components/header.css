@@ -23,3 +23,7 @@
     font-size: 1.1875rem;
     color: white;
 }
+.main-header ul li:hover {
+    cursor: pointer;
+    color: black;
+}

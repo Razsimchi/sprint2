@@ -1,10 +1,9 @@
 .gallery-search input {
-    height: 6.375rem;
+    height: 2.375rem;
     border: none;
     width: fit-content;
-}
-.gallery-search{
-    background-color: white;
+    border-radius: 12px;
+    margin-block-end: 15px;
 }
 .gallery-search input::placeholder{
     border-block-end: solid 1px black;
@@ -16,6 +15,9 @@
     display: block;
     width: 100%;
 }
+.img-gallery:hover{
+   cursor: pointer;
+}
 .bottom-section-gallery-inside{
     display: flex;
     gap: 41px;
@@ -25,4 +27,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+.key-words{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.key-words span:hover{
+    cursor: pointer;
+    color: gray;
 }

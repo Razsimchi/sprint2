@@ -19,16 +19,20 @@
                     <li onclick="onMeme()">Meme</li>
                     <li onclick="onGallery()">Gallery</li>
                     <li onclick="onMyMemes()">My Memes</li>
-                    <li>About</li>
                 </ul>
             </nav>
-            <button  onclick="toggleMenu()" class="btn-menu">☰</button>
+            <button  onclick="toggleMenu()" class="btn btn-menu">☰</button>
         </div>
     </header>
     <div class="saved-memes meme-layout" style="display: none;">
     </div>
-    <div class="full main-layout gallery-search" style="display: none;"><input type="search"
-            placeholder="Enter search keyword"></div>
+    <div class="full main-layout gallery-search" style="display: none;">
+        <form onkeyup="onSearch()">
+            <input class="search-input" type="search"
+            placeholder="Enter keyword">
+        </form>
+        <div class="key-words"></div>
+        </div>
     <main>
         <section class="gallery gallery-layout " style="display: none;">
         </section>
@@ -96,9 +100,9 @@
     </footer>
 
     <script src="js/service/storage.service.js"></script>
+    <script src="js/service/gallery.service.js"></script>
     <script src="js/service/main.service.js"></script>
     <script src="js/controller/main.controller.js"></script>
     <script src="js/controller/gallery.controller.js"></script>
 </body>
-
 </html>

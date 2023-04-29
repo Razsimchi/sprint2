@@ -4,8 +4,6 @@ const gPositions = [{ x: 200, y: 40 }, { x: 200, y: 360 }, { x: 200, y: 200 }]
 let gElCanvas
 let gCtx
 let gSavedMemes = loadFromStorage(STORAGE_KEY) || []
-let gImgs = fillgImgs()
-let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 let gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
@@ -15,7 +13,9 @@ let gMeme = {
             size: 20,
             align: 'left',
             color: 'white',
-            isStroke: true
+            isStroke: true,
+            isDrag: false,
+            pos: { x: 200, y: 40 }
         }
     ]
 }
@@ -42,7 +42,7 @@ function getgCtx() {
     return gCtx
 }
 function drawText(text, x, y, color, isStroke, size, align, font = 'Impact') {
-    gCtx.lineWidth = 2
+    gCtx.lineWidth = 1
     gCtx.strokeStyle = 'black'
     gCtx.fillStyle = color
     gCtx.font = `${size}px ${font}`
@@ -53,9 +53,6 @@ function drawText(text, x, y, color, isStroke, size, align, font = 'Impact') {
 }
 function getgMeme() {
     return gMeme
-}
-function getgImgs() {
-    return gImgs
 }
 function findImgById(id) {
     return gImgs.find(img => img.id === id)
@@ -85,14 +82,6 @@ function updategMeme(txt) {
 function _saveMemeToStorage() {
     saveToStorage(STORAGE_KEY, gSavedMemes)
 }
-function fillgImgs() {
-    const imgs = []
-    for (let i = 0; i < 18; i++) {
-        const img = { id: i + 1, url: `images/${i + 1}.jpg` }
-        imgs.push(img)
-    }
-    return imgs
-}
 function setImg(id) {
     gMeme.selectedImgId = id
 }
@@ -103,6 +92,7 @@ function changeLine() {
     } else lineIdx++
     if (!gMeme.lines[lineIdx]) return
     gMeme.selectedLineIdx = lineIdx
+    gMeme.lines[lineIdx].pos = getLinePos(lineIdx)
 }
 function createNewLine() {
     const line = {
@@ -110,7 +100,8 @@ function createNewLine() {
         size: 20,
         align: 'left',
         color: 'white',
-        isStroke: true
+        isStroke: true,
+        isDrag: false,
     }
     gMeme.lines.push(line)
     changeLine()
@@ -157,18 +148,35 @@ function getEvPos(ev) {
         x: ev.offsetX,
         y: ev.offsetY,
     }
+    if (TOUCH_EVS.includes(ev.type)) {
+        ev.preventDefault()
+        ev = ev.changedTouches[0]
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+        }
+    }
     return pos
 }
 function addMouseListeners() {
     gElCanvas.addEventListener('click', onCanvasClick)
+    gElCanvas.addEventListener('mousedown', onDown)
+    gElCanvas.addEventListener('mousemove', onMove)
+    gElCanvas.addEventListener('mouseup', onUp)
+}
+function addTouchListeners() {
+    gElCanvas.addEventListener('touchstart', onDown)
+    gElCanvas.addEventListener('touchmove', onMove)
+    gElCanvas.addEventListener('touchend', onUp)
 }
 function handleCanvasClick(ev) {
     let lineIdx
     const pos = getEvPos(ev)
-    if (pos.y >= 20 && pos.y <= 55) lineIdx = 0
-    else if (pos.y >= 340 && pos.y <= 375) lineIdx = 1
-    else if (pos.y >= 180 && pos.y <= 215) lineIdx = 2
-    else return
+    gMeme.lines.forEach((line, idx) => {
+        if (pos.y >= line.pos.y - 20 && pos.y <= line.pos.y + 20) {
+            lineIdx = idx
+        }
+    })
     gMeme.selectedLineIdx = lineIdx
 }
 function updategElCanvas(elContainer) {
@@ -180,7 +188,7 @@ function getgSavedMemes() {
 }
 function save() {
     const imgContent = gElCanvas.toDataURL('image/jpeg')
-    gSavedMemes.push({ img: imgContent, meme: {...gMeme}})
+    gSavedMemes.push({ img: imgContent, meme: { ...gMeme } })
     _saveMemeToStorage()
 }
 function setgMeme(idx) {
@@ -190,4 +198,17 @@ function addToImgs(img) {
     const image = { id: gImgs.length + 1, url: img }
     gMeme.selectedImgId = gImgs.length + 1
     gImgs.push(image)
+}
+function updateIsClicked(bool) {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].isDrag = bool
+}
+function moveShape(dx, dy) {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].pos.x += dx
+    gMeme.lines[lineIdx].pos.y += dy
+}
+function updatePos(pos) {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].pos = pos
 }
