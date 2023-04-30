@@ -162,7 +162,7 @@ function addMouseListeners() {
     gElCanvas.addEventListener('click', onCanvasClick)
     gElCanvas.addEventListener('mousedown', onDown)
     gElCanvas.addEventListener('mousemove', onMove)
-    gElCanvas.addEventListener('mouseup', onUp)
+    gElCanvas.addEventListener('mouseup', onUp)  
 }
 function addTouchListeners() {
     gElCanvas.addEventListener('touchstart', onDown)
@@ -211,4 +211,20 @@ function moveShape(dx, dy) {
 function updatePos(pos) {
     const lineIdx = gMeme.selectedLineIdx
     gMeme.lines[lineIdx].pos = pos
+}
+function getTxtPos(idx) {
+    const line = gMeme.lines[idx]
+    let height = line.size
+    let yStart = line.pos.y - height
+    let yEnd = height + (height / 2)
+
+    return {yStart, yEnd }
+}
+function markSelectedTxt(yStart,yEnd) {
+    gCtx.beginPath()
+    gCtx.roundRect(0, yStart, gElCanvas.width, yEnd)
+    gCtx.lineWidth = 1
+    gCtx.strokeStyle = 'black'
+    gCtx.stroke()
+    gCtx.closePath()
 }

@@ -11,6 +11,7 @@ function onImgSelect(id){
     setImg(id)
     updategMeme('')
     renderMeme()
+    onClear()
     onMeme()
 }
 function onGallery(){

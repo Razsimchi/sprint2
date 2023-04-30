@@ -25,6 +25,10 @@ function renderMeme() {
         lines.forEach((line, idx) => {
             const { txt, size, align, isStroke, color, font, pos } = line
             drawText(txt, pos.x, pos.y, color, isStroke, size, align, font)
+            const txtCoords = getTxtPos(idx)
+            if (idx === selectedLineIdx) {
+                markSelectedTxt(txtCoords.yStart,txtCoords.yEnd)
+            }
         })
     }
 }
@@ -152,6 +156,7 @@ function onSave() {
     save()
     console.log(gSavedMemes);
     renderSavedMemes()
+    onMyMemes()
 }
 function renderSavedMemes() {
     const savedMemes = getgSavedMemes()
