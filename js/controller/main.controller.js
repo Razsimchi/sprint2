@@ -13,7 +13,7 @@ function onInit() {
     addMouseListeners()
     addTouchListeners()
 }
-function renderMeme() {
+function renderMeme(isMarked = true) {
     changeColor()
     const { selectedImgId, selectedLineIdx, lines } = getgMeme()
     const ctx = getgCtx()
@@ -26,14 +26,17 @@ function renderMeme() {
             const { txt, size, align, isStroke, color, font, pos } = line
             drawText(txt, pos.x, pos.y, color, isStroke, size, align, font)
             const txtCoords = getTxtPos(idx)
-            if (idx === selectedLineIdx) {
+            if (idx === selectedLineIdx&&isMarked) {
                 markSelectedTxt(txtCoords.yStart,txtCoords.yEnd)
             }
         })
     }
 }
 function onTextInput(ev) {
-    if (ev.keyCode === 13) return
+    if (ev.keyCode === 13) {
+        renderMeme(false)
+        return
+    }
     const txt = document.querySelector('.text-input').value
     updategMeme(txt)
     renderMeme()
